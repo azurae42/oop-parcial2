@@ -10,4 +10,6 @@ private:
   std::vector<Student> students;
 
 public:
+  Classroom();
+  void add_student(const Student &s_);
 };
