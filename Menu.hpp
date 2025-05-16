@@ -12,6 +12,9 @@ class Menu
 private:
   int user_choice = 0;
 
+  CSV_Grades csv_handler;
+  Classroom classroom;
+
 public:
   Menu();
 };

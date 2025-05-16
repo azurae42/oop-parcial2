@@ -9,21 +9,30 @@ class Student
 private:
   std::string first_name;
   std::string last_name;
-  int midterm_grades[NO_OF_MIDTERMS];
+  int midterm_grades[NO_OF_MIDTERMS] = {};
   int age;
 
 public:
+  Student();
   Student(const std::string &fname_,
           const std::string &lname_,
           const int (&mt_grades_)[NO_OF_MIDTERMS],
           const int &age_);
 
+  std::string get_full_name() const;
   int grade_average() const;
   bool is_failing() const;
   bool is_passing() const;
+  bool is_underage() const;
 
   std::string to_csv_line() const;
 };
+
+Student::Student()
+    : first_name("dummy"),
+      last_name("dummy"),
+      midterm_grades{-1, -1, -1},
+      age(0) {}
 
 Student::Student(const std::string &fname_,
                  const std::string &lname_,
@@ -33,6 +42,11 @@ Student::Student(const std::string &fname_,
 {
   for (size_t i = 0; i < NO_OF_MIDTERMS; i++)
     midterm_grades[i] = mt_grades_[i];
+}
+
+std::string Student::get_full_name() const
+{
+  return std::string(first_name + " " + last_name);
 }
 
 int Student::grade_average() const
@@ -52,6 +66,11 @@ bool Student::is_failing() const
 bool Student::is_passing() const
 {
   return grade_average() >= 70;
+}
+
+bool Student::is_underage() const
+{
+  return age < 18;
 }
 
 std::string Student::to_csv_line() const

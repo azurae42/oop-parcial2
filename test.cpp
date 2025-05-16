@@ -2,6 +2,8 @@
 #include <string>
 
 #include "Student.hpp"
+#include "Classroom.hpp"
+#include "CSV-Grades.hpp"
 
 struct student_t
 {
@@ -65,8 +67,16 @@ void print_student(const student_t &s_)
 
 int main()
 {
-  std::cout << my_stoi("128");
-  student_t s = parse_line("FirstName,LastName,12,98,54,19");
-  // Interface run;
+  // std::cout << my_stoi("128");
+
+  // student_t s = parse_line("FirstName,LastName,12,98,54,19");
+
+  Classroom classroom_(
+      {{"a", "a", {10, 10, 10}, 18},
+       {"maria jose", "castilla", {11, 11, 11}, 17},
+       {"c", "c", {9, 9, 9}, 17}});
+
+  std::cout << classroom_.highest_grade().to_csv_line();
+
   return 0;
 }
