@@ -16,7 +16,7 @@
                 "parcial.out"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceRoot}"
             },
             "problemMatcher": [
                 "$gcc"

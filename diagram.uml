@@ -1,63 +1,80 @@
+@startuml
 
 class Student {
-    -string first_name
-    -string last_name
-    -int midterm_grades[3]
-    -int age
-    +static const int NO_OF_MIDTERMS = 3
-    +Student()
-    +Student(fname_, lname_, mt_grades_, age_)
-    +string get_full_name()
-    +tuple~string,string~ get_names()
-    +int grade_average()
-    +bool is_failing()
-    +bool is_passing()
-    +bool is_underage()
-    +string to_csv_line()
+  + NO_OF_MIDTERMS: int = 3
+  - first_name: string
+  - last_name: string
+  - midterm_grades: int[3]
+  - age: int
+  --
+  + Student()
+  + Student(fname_: string, lname_: string, mt_grades_: int[3], age_: int)
+  + get_full_name(): string
+  + get_names(): pair<string, string>
+  + grade_average(): int
+  + is_failing(): bool
+  + is_passing(): bool
+  + is_underage(): bool
+  + to_pretty_string(): string
+  + to_csv_line(): string
 }
 
 class Classroom {
-    -vector~Student~ students
-    +Classroom()
-    +Classroom(students_)
-    +void add_student(s_)
-    +vector~size_t~ matching_names(full_name_)
-    +void remove_student(pos_)
-    +Student top_student()
-    +vector~Student~ failing_students()
-    +vector~Student~ get_all_students()
+  - students: vector<Student>
+  --
+  + Classroom()
+  + Classroom(students_: vector<Student>)
+  + get_student_list(): vector<Student>
+  + add_student(s_: Student): void
+  + matching_names(name_to_match: string): vector<size_t>
+  + remove_student(pos_: size_t): void
+  + top_student(): Student
+  + failing_students(): vector<Student>
 }
 
 class CSV_Grades {
-    -ifstream in
-    -ofstream out
-    -string open_r_file
-    -string open_w_file
-    -int my_stoi(s_)
-    -Student parse_line(line_)
-    +CSV_Grades()
-    +void open_file_to_read(filename_r_)
-    +void open_file_to_write(filename_w_)
-    +vector~Student~ read_students_from_file()
-    +void write_student_to_file(s_)
+  - HEADER: string = "Nombre,Apellido,Parcial1,Parcial2,Parcial3,Edad"
+  - in: ifstream
+  - out: ofstream
+  - opened_file_to_read: string
+  - opened_file_to_write: string
+  --
+  + CSV_Grades()
+  + get_opened_file_read(): string
+  + get_opened_file_write(): string
+  + open_file_to_read(filename_read_: string): bool
+  + open_file_to_write(filename_write_: string): bool
+  + open_file_to_overwrite(filename_overwrite_: string): bool
+  + read_students_from_file(): vector<Student>
+  + write_header_to_file(): void
+  + write_student_to_file(s_: Student): void
+  + update_file(s_list: vector<Student>): void
+  + end_file_read(): void
+  + end_file_write(): void
+  - my_stoi(s_: string): int
+  - parse_line(line_: string): Student
 }
 
 class Menu {
-    -int user_choice
-    -string original_filename
-    -CSV_Grades csv_handler
-    -Classroom classroom
-    -void load_file()
-    -void print_grades()
-    -void general_info()
-    -void show_failing_students()
-    -void add_new_student()
-    -void remove_student()
-    -void update_original_file()
-    +Menu()
+  - user_choice: int
+  - students_are_loaded: bool
+  - original_filename: string
+  - csv_handler: CSV_Grades
+  - classroom: Classroom
+  --
+  + Menu()
+  - load_file(): void
+  - print_grades(): void
+  - general_info(): void
+  - show_failing_students(): void
+  - add_new_student(): void
+  - remove_student(): void
+  - update_original_file(): void
 }
 
 Menu --> CSV_Grades : usa a
 Menu --> Classroom : usa a
 Classroom --> Student : contiene
 CSV_Grades --> Student : crea/escribe
+
+@enduml

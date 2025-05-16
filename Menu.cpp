@@ -27,15 +27,7 @@ Menu::Menu()
     std::cout << "7. Salir\n";
     std::cout << "Ingrese su opción: ";
 
-    if (!(std::cin >> user_choice))
-    {
-      std::cin.clear();
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      std::cout << "Opción inválida. Por favor ingrese un número.\n";
-      continue;
-    }
-
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin >> user_choice;
 
     switch (user_choice)
     {
@@ -68,6 +60,7 @@ Menu::Menu()
 
 void Menu::load_file()
 {
+  std::cin.ignore();
   std::string filename;
   std::cout << "Ingrese el nombre del archivo (incluya la ruta si es necesario): ";
   std::getline(std::cin, filename);
@@ -86,6 +79,7 @@ void Menu::load_file()
 
 void Menu::print_grades()
 {
+  std::cin.ignore();
   if (!students_are_loaded)
   {
     std::cerr << "Error: Primero debe cargar un archivo de estudiantes (opción 1).\n";
@@ -171,6 +165,8 @@ void Menu::show_failing_students()
 
 void Menu::add_new_student()
 {
+  std::cin.ignore();
+
   if (!students_are_loaded)
   {
     std::cout << "Error: Primero debe cargar un archivo de estudiantes (opción 1).\n";
@@ -221,6 +217,7 @@ void Menu::add_new_student()
 
 void Menu::remove_student()
 {
+  std::cin.ignore();
   if (!students_are_loaded)
   {
     std::cout << "Error: Primero debe cargar un archivo de estudiantes (opción 1).\n";
