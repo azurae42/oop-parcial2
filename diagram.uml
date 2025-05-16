@@ -71,9 +71,9 @@ class Menu {
   - remove_student(): void
 }
 
-Menu --> CSV_Grades : usa a
-Menu --> Classroom : usa a
+Menu --> CSV_Grades : contiene
+Menu --> Classroom : contiene
 Classroom --> Student : contiene
-CSV_Grades --> Student : crea/escribe
+CSV_Grades --> Classroom : lee/escribe
 
 @enduml
