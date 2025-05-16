@@ -76,7 +76,7 @@ int main()
        {"maria jose", "castilla", {11, 11, 11}, 17},
        {"c", "c", {9, 9, 9}, 17}});
 
-  std::cout << classroom_.highest_grade().to_csv_line();
+  std::cout << classroom_.top_student().to_csv_line();
 
   return 0;
 }

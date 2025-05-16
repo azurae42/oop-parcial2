@@ -1,0 +1,63 @@
+
+class Student {
+    -string first_name
+    -string last_name
+    -int midterm_grades[3]
+    -int age
+    +static const int NO_OF_MIDTERMS = 3
+    +Student()
+    +Student(fname_, lname_, mt_grades_, age_)
+    +string get_full_name()
+    +tuple~string,string~ get_names()
+    +int grade_average()
+    +bool is_failing()
+    +bool is_passing()
+    +bool is_underage()
+    +string to_csv_line()
+}
+
+class Classroom {
+    -vector~Student~ students
+    +Classroom()
+    +Classroom(students_)
+    +void add_student(s_)
+    +vector~size_t~ matching_names(full_name_)
+    +void remove_student(pos_)
+    +Student top_student()
+    +vector~Student~ failing_students()
+    +vector~Student~ get_all_students()
+}
+
+class CSV_Grades {
+    -ifstream in
+    -ofstream out
+    -string open_r_file
+    -string open_w_file
+    -int my_stoi(s_)
+    -Student parse_line(line_)
+    +CSV_Grades()
+    +void open_file_to_read(filename_r_)
+    +void open_file_to_write(filename_w_)
+    +vector~Student~ read_students_from_file()
+    +void write_student_to_file(s_)
+}
+
+class Menu {
+    -int user_choice
+    -string original_filename
+    -CSV_Grades csv_handler
+    -Classroom classroom
+    -void load_file()
+    -void print_grades()
+    -void general_info()
+    -void show_failing_students()
+    -void add_new_student()
+    -void remove_student()
+    -void update_original_file()
+    +Menu()
+}
+
+Menu --> CSV_Grades : usa a
+Menu --> Classroom : usa a
+Classroom --> Student : contiene
+CSV_Grades --> Student : crea/escribe

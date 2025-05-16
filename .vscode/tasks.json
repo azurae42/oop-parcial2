@@ -7,9 +7,13 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "main.cpp",
+                "Student.cpp",
+                "Classroom.cpp",
+                "CSV-Grades.cpp",
+                "Menu.cpp",
                 "-o",
-                "${fileBasenameNoExtension}.out"
+                "parcial.out"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

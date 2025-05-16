@@ -17,7 +17,7 @@ public:
   void add_student(const Student &s_);
   std::vector<size_t> matching_names(const std::string &full_name_) const;
   void remove_student(const size_t &pos_);
-  Student highest_grade() const;
+  Student top_student() const;
   std::vector<Student> failing_students() const;
 };
 
@@ -49,7 +49,7 @@ void Classroom::remove_student(const size_t &pos_)
   students.erase(students.begin() + pos_);
 }
 
-Student Classroom::highest_grade() const
+Student Classroom::top_student() const
 {
   Student hi_score;
 
