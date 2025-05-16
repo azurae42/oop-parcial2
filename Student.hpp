@@ -13,15 +13,29 @@ private:
   int age;
 
 public:
-  Student(const std::string &fname_, const std::string &lname_,
-          const int grades[3], const int &age_);
+  Student(const std::string &fname_,
+          const std::string &lname_,
+          const int (&mt_grades_)[NO_OF_MIDTERMS],
+          const int &age_);
 
-  float grade_average() const;
+  int grade_average() const;
   bool is_failing() const;
   bool is_passing() const;
+
+  std::string to_csv_line() const;
 };
 
-float Student::grade_average() const
+Student::Student(const std::string &fname_,
+                 const std::string &lname_,
+                 const int (&mt_grades_)[NO_OF_MIDTERMS],
+                 const int &age_)
+    : first_name(fname_), last_name(lname_), age(age_)
+{
+  for (size_t i = 0; i < NO_OF_MIDTERMS; i++)
+    midterm_grades[i] = mt_grades_[i];
+}
+
+int Student::grade_average() const
 {
   float grade_sum = 0;
   for (size_t i = 0; i < NO_OF_MIDTERMS; i++)
@@ -38,4 +52,18 @@ bool Student::is_failing() const
 bool Student::is_passing() const
 {
   return grade_average() >= 70;
+}
+
+std::string Student::to_csv_line() const
+{
+  std::string str;
+
+  str += first_name + "," + last_name + ",";
+
+  for (size_t i = 0; i < NO_OF_MIDTERMS; i++)
+    str += std::to_string(midterm_grades[i]) + ",";
+
+  str += std::to_string(age);
+
+  return str;
 }

@@ -1,0 +1,21 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+
+#include "Student.hpp"
+#include "Classroom.hpp"
+#include "CSV-Grades.hpp"
+
+class Menu
+{
+private:
+  int user_choice = 0;
+
+public:
+  Menu();
+};
+
+Menu::Menu()
+{
+}
