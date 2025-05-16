@@ -25,7 +25,6 @@ private:
   void show_failing_students();
   void add_new_student();
   void remove_student();
-  void update_original_file();
 
 public:
   Menu();
