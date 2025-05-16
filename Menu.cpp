@@ -8,6 +8,16 @@ Menu::Menu()
   while (!exit_menu)
   {
     std::cout << "\n=== SISTEMA DE REVISIÓN DE CALIFICACIONES ===\n";
+
+    if (csv_handler.get_opened_file_read().empty())
+    {
+      std::cout << "No hay ningún archivo cargado.\n";
+    }
+    else
+    {
+      std::cout << "Archivo cargado: " + csv_handler.get_opened_file_read() + "\n";
+    }
+
     std::cout << "1. Leer archivo de texto de entrada\n";
     std::cout << "2. Imprimir calificaciones\n";
     std::cout << "3. Información general\n";
@@ -96,8 +106,7 @@ void Menu::print_grades()
   csv_handler.write_header_to_file();
 
   // Display grades and write to output file
-  std::cout << "\n=== CALIFICACIONES DE ESTUDIANTES ===\n";
-  std::cout << "Nombre Apellido, Parcial 1, Parcial 2, Parcial 3, Edad.\n";
+  std::cout << "\n=== CALIFICACIONES DE ESTUDIANTES (N A, Par 1, Par 2, Par 3, Edad) ===\n";
 
   for (Student s : classroom.get_student_list())
   {
@@ -206,9 +215,7 @@ void Menu::add_new_student()
   classroom.add_student(new_student);
 
   // Append student to original file
-  csv_handler.open_file_to_write(original_filename);
-  csv_handler.write_student_to_file(new_student);
-
+  csv_handler.update_file(classroom.get_student_list());
   std::cout << "Estudiante agregado correctamente.\n";
 }
 

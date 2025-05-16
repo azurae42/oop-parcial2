@@ -63,15 +63,15 @@ bool CSV_Grades::open_file_to_read(const std::string &filename_read_)
   if (!opened_file_to_read.empty())
   {
     std::cout << "Cerrando archivo anterior...\n";
-    in.close();
+    end_file_read();
   }
 
   in.open(filename_read_);
 
   if (!in.good())
   {
-    std::cerr << "err: file could not be opened.\n";
-    in.close();
+    std::cerr << "read err: file could not be opened.\n";
+    end_file_read();
     return true;
   }
   else
@@ -83,12 +83,18 @@ bool CSV_Grades::open_file_to_read(const std::string &filename_read_)
 
 bool CSV_Grades::open_file_to_write(const std::string &filename_write_)
 {
+  if (!opened_file_to_write.empty())
+  {
+    std::cout << "Cerrando archivo anterior...\n";
+    end_file_write();
+  }
+
   out.open(filename_write_, std::ios::app);
 
   if (!out.good())
   {
-    std::cerr << "err: file could not be opened.\n";
-    out.close();
+    std::cerr << "write err: file could not be opened.\n";
+    end_file_write();
     return true;
   }
   else
@@ -100,12 +106,18 @@ bool CSV_Grades::open_file_to_write(const std::string &filename_write_)
 
 bool CSV_Grades::open_file_to_overwrite(const std::string &filename_overwrite_)
 {
+  if (!opened_file_to_write.empty())
+  {
+    std::cout << "Cerrando archivo anterior...\n";
+    end_file_write();
+  }
+
   out.open(filename_overwrite_, std::ios::trunc);
 
   if (!out.good())
   {
     std::cerr << "err: file could not be opened.\n";
-    out.close();
+    end_file_write();
     return true;
   }
   else
