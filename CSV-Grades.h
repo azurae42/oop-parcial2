@@ -11,8 +11,6 @@ class CSV_Grades
 // Format: FirstName,LastName,Midterm1,Midterm2,Midterm3,Age
 {
 private:
-  const std::string HEADER = "Nombre,Apellido,Parcial1,Parcial2,Parcial3,Edad";
-
   std::ifstream in;
   std::ofstream out;
 

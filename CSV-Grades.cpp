@@ -150,6 +150,7 @@ std::vector<Student> CSV_Grades::read_students_from_file()
 
 void CSV_Grades::write_header_to_file()
 {
+  static const std::string HEADER = "Nombre,Apellido,Parcial1,Parcial2,Parcial3,Edad";
   out << HEADER << "\n";
 }
 
